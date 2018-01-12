@@ -45,9 +45,26 @@ configuration options:
 * Please configure the `rcrc` file if you'd like to make personal
   overrides in a different directory
 
+Track
+-----
+
+After you forked the repo to your Github account:
+
+    git clone git@github.com:seniorihor/dotfiles.git
+    cd dotfiles
+    git remote add upstream git@github.com:thoughtbot/dotfiles.git
 
 Update
 ------
+
+Each time you want to update, from local master branch:
+
+    git fetch upstream
+    git rebase upstream/master
+
+The goal of the rebase is to have a cleaner history if I have local changes or
+commits on the repo. It’s the difference between the left and the right in
+the image below.
 
 From time to time you should pull down any updates to these dotfiles, and run
 
@@ -56,6 +73,15 @@ From time to time you should pull down any updates to these dotfiles, and run
 to link any new files and install new vim plugins. **Note** You _must_ run
 `rcup` after pulling to ensure that all files in plugins are properly installed,
 but you can safely run `rcup` multiple times so update early and update often!
+
+
+Commit rights upstream
+----------------------
+
+If you also have commit rights to the upstream repo, you can create a local upstream
+branch and do work that will go upstream there.
+
+    git checkout -b upstream upstream/master
 
 Make your own customizations
 ----------------------------
