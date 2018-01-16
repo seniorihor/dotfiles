@@ -38,10 +38,10 @@ set-option -g mouse on
 # increase scrollback lines
 set -g history-limit 100000
 
-# Vim keys for select, copy and paste text in copy mode, integrated with X clipboard
-bind-key -t vi-copy v begin-selection
-bind-key -t vi-copy y copy-pipe "xsel -i -p -b"
-bind-key p run "xsel -o | tmux load-buffer - ; tmux paste-buffer"
+# TODO: Vim keys for select, copy and paste text in copy mode, integrated with macOS
+# bind-key -t vi-copy v begin-selection
+# bind-key -t vi-copy y copy-pipe "xsel -i -p -b"
+# bind-key p run "xsel -o | tmux load-buffer - ; tmux paste-buffer"
 
 # easy-to-remember split pane commands
 bind | split-window -h
@@ -134,9 +134,14 @@ set -g message-bg colour166
 #####################
 
 # list of plugins
-set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin 'tmux-plugins/tmux-open'
-set -g @plugin "jlipps/tmux-safekill"
+set -g @tpm_plugins '          \
+  tmux-plugins/tpm             \
+  tmux-plugins/tmux-open       \
+  jlipps/tmux-safekill         \
+'
 
 # initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+setenv -g TMUX_PLUGIN_MANAGER_PATH '$HOME/.tmux/plugins/'
+if "test ! -d ~/.tmux/plugins/tpm" \
+  "run 'git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm && ~/.tmux/plugins/tpm/bin/install_plugins'"
 run '~/.tmux/plugins/tpm/tpm'
